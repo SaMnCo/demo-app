@@ -1,0 +1,9 @@
+steps:
+  - name: "gcr.io/cloud-builders/go"
+    args: ["install", "github.com/samnco/demo-app"]
+    env: ["PROJECT_ROOT=github.com/samnco/demo-app"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/landg-179815/demo-app:$REVISION_ID", "-f", "Dockerfile", "."]
+images:
+  - "gcr.io/landg-179815/demo-app:$REVISION_ID"
+
