@@ -16,6 +16,8 @@ jobs:
     public: true
     plan: 
     - get: demo-app
+    - task: list-folder
+      file: demo-app/ci/list_folder.yaml    
     - task: lint-dockerfile
       file: demo-app/ci/lint_dockerfile.yaml
     - put: demo-app-docker-image
