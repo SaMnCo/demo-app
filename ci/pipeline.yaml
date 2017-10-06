@@ -1,0 +1,25 @@
+resources: 
+  - name: demo-app
+    type: git 
+    source: 
+      uri: https://github.com/SaMnCo/demo-app
+  - name: demo-app-docker-image
+    type: docker-image
+    source:
+      email: {{docker-email}}
+      username: {{docker-username}}
+      password: {{docker-password}}
+      repository: {{docker-image}}
+
+jobs: 
+  - name: demo-app
+    public: true
+    plan: 
+    - get: demo-app
+    - task: lint-dockerfile
+      file: demo-app/ci/lint_dockerfile.yaml
+    - put: demo-app-docker-image
+      params: 
+        build: demo-app
+
+
