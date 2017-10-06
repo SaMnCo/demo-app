@@ -1,6 +1,10 @@
-FROM alpine
+FROM golang:1.8
 MAINTAINER Samuel Cozannet <samnco@gmail.com>
 
-COPY gopath/bin/gcp-cd-codelab /go/bin/gcp-cd-codelab
+WORKDIR /go/src/app
+COPY . .
 
-ENTRYPOINT /go/bin/gcp-cd-codelab
+RUN go-wrapper download
+RUN go-wrapper install
+
+CMD ["go-wrapper", "run"]
