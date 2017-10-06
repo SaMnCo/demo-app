@@ -8,7 +8,7 @@ image_resource:
     tag: 'latest'
 
 inputs:
-- name: demo-app/ci
+- name: demo-app
 
 run:
-  path: demo-app/ci/lint_dockerfile.sh
+  path: ./demo-app/ci/lint_dockerfile.sh
