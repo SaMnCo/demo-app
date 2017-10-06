@@ -28,24 +28,24 @@ resources:
       username: {{docker-username}}
       password: {{docker-password}}
       repository: {{docker-image}}
-  - name: slack-alert-infra
+  - name: slack-notification
     type: slack-notification
     source:
       url: {{slack-url}}
-  - name: helm-demo-app
-    type: helm
-    source:
-      cluster_url: {{k8s-cluster-url}}
-      cluster_ca: {{k8s-cluster-ca}}
-      admin_key: {{k8s-admin-key}}
-      admin_cert: {{k8s-admin-cert}}
-      repos:
-        - name: stable
-          url: https://kubernetes-charts.storage.googleapis.com
-        - name: incubator
-          url: https://kubernetes-charts.storage.googleapis.com
-        - name: oic
-          url: https://{{charts-bucket}}-charts.storage.googleapis.com
+  # - name: helm-demo-app
+  #   type: helm
+  #   source:
+  #     cluster_url: {{k8s-cluster-url}}
+  #     cluster_ca: {{k8s-cluster-ca}}
+  #     admin_key: {{k8s-admin-key}}
+  #     admin_cert: {{k8s-admin-cert}}
+  #     repos:
+  #       - name: stable
+  #         url: https://kubernetes-charts.storage.googleapis.com
+  #       - name: incubator
+  #         url: https://kubernetes-charts.storage.googleapis.com
+  #       - name: oic
+  #         url: https://{{charts-bucket}}-charts.storage.googleapis.com
 
 jobs: 
   - name: demo-app
