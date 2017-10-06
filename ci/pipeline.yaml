@@ -48,7 +48,7 @@ resources:
   #         url: https://{{charts-bucket}}-charts.storage.googleapis.com
 
 jobs: 
-  - name: demo-app
+  - name: build-docker-image
     public: true
     plan: 
     - get: demo-app
@@ -57,7 +57,21 @@ jobs:
     - put: demo-app-docker-image
       params: 
         build: demo-app
-    ## Example of Slack Integration
+    - put: slack-notification
+      params:
+        # channel: '#infrastructure'
+        # text_file: results/message.txt
+        text: |
+          The build had a result. Check it out at:
+          https://concourse.{{domain}}/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+          or at:
+          https://concourse.{{domain}}/builds/$BUILD_ID
+
+          Result: Successfully pushed new docker image   
+  - name: build-helm-chart
+    public: true
+    plan: 
+    - get: demo-app
     - task: lint-helm
       file: demo-app/ci/lint_helm.yaml
     - put: slack-notification
@@ -70,4 +84,4 @@ jobs:
           or at:
           https://concourse.{{domain}}/builds/$BUILD_ID
 
-          Result: $TEXT_FILE_CONTENT    
+          Result: Successfully built new Helm Chart   
